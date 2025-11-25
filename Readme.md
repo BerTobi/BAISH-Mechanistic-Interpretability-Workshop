@@ -55,8 +55,121 @@ At the bottom of the script, there is an "Exercises" section. Try to complete at
 
 * **Exercise 1 (Diagnostics):** Validate the capitalization probe
 
-* **Exercise 2 (New Taks):** Write a probe for Vowels vs. Consonants.
+* **Exercise 2 (New Task):** Write a probe for Vowels vs. Consonants.
 
-## 🔜 Coming Soon: Part 2
+---
 
-In the next session, we will move away from raw PyTorch hooks and introduce **Transformer Lens**, a library specifically designed to make mechanistic interpretability easier, faster, and more powerful.
+# Mechanistic Interpretability Workshop: Part 2
+**Probing GPT-2 with TransformerLens**
+
+In Part 2, we scale up! We move from toy transformers to **GPT-2** (124M parameters) and use **TransformerLens**, a library specifically designed for mechanistic interpretability research.
+
+## 🎯 What You'll Learn
+
+In this session, you'll discover:
+
+1. **TransformerLens Basics**: How to access any layer's activations with simple, clean code
+2. **Factual Recall Probing**: Does GPT-2 know when sentences are factually plausible?
+3. **Negation Understanding**: Can GPT-2 track whether statements are affirmative or negated?
+4. **Contrastive Learning**: How to properly create positive/negative examples for probing
+5. **Hierarchical Processing**: Different features emerge at different layers!
+
+## 🔬 Key Discoveries
+
+By the end of Part 2, you'll see:
+
+- **Factual plausibility** peaks in middle layers (5-6) - requires semantic processing
+- **Negation detection** emerges early (layers 1-2) - it's a surface lexical feature!
+- **Different capabilities, different layers** - reveals the computational structure of transformers
+
+## 📁 Files for Part 2
+
+* **`workshop_part2_gpt2_probing.py`** - Main workshop script with two probing tasks
+* Uses the same `# %%` cell markers for interactive execution
+
+## 🛠️ Additional Requirements for Part 2
+
+Install TransformerLens:
+
+```bash
+pip install transformer-lens
+```
+
+Note: This will download GPT-2 small (~500MB) on first run.
+
+## 🚀 How to Follow Part 2
+
+1. Open `workshop_part2_gpt2_probing.py`
+2. Run cells interactively (same as Part 1)
+3. The script has two main sections:
+   - **Task 1: Factual Recall** - "Paris is the capital of France" vs "Paris is the capital of Germany"
+   - **Task 2: Negation Understanding** - "Paris is in France" vs "Paris is not in France"
+4. Watch how different features emerge at different layers!
+
+## 🎓 What Makes Part 2 Different?
+
+### Conceptual Advances:
+- **Sentence-level probing**: Run complete sentences, not just prompts
+- **Contrastive examples**: Compare correct vs incorrect completions
+- **Balanced datasets**: Avoid the "majority class trap"
+- **Diagnostic rigor**: Always compare to base rate and random noise
+
+### Technical Advances:
+- **TransformerLens**: Much cleaner than manual PyTorch hooks
+- **Larger models**: GPT-2 (124M) vs toy models (~1M)
+- **Token-level**: Work with subword tokens, not characters
+- **Layer patterns**: Discover hierarchical processing
+
+## 🧪 Exercises for Part 2
+
+The script includes 8 exercises:
+
+1. **Analyze Layer Patterns** - Why does negation emerge earlier than facts?
+2. **Test Different Facts** - Do mathematical facts peak at the same layers as geography?
+3. **Sentiment Detection** - Create a positive/negative sentiment probe
+4. **Increase Dataset Size** - Does more data change the patterns?
+5. **Probe MLP Outputs** - What does each component (attention vs MLP) compute?
+6. **Analyze Failure Cases** - What does the probe get wrong?
+7. **Cross-Task Generalization** - Do probes transfer between tasks?
+8. **Temporal Understanding** - Create a past/present tense probe
+
+## 🔑 Key Takeaways
+
+### Part 1 Taught You:
+- How to use PyTorch hooks
+- How to train linear probes
+- How to validate probes with diagnostics
+- Character-level features in toy models
+
+### Part 2 Teaches You:
+- How to use TransformerLens (much easier!)
+- How to probe large models (GPT-2)
+- How to design proper contrastive datasets
+- **That transformers are hierarchical**: syntax → semantics → output
+
+### The Big Picture:
+Transformers aren't black boxes! Different layers specialize in different computations:
+- **Early layers**: Surface features (negation markers, basic syntax)
+- **Middle layers**: Semantic processing (factual plausibility, meaning)
+- **Later layers**: Output preparation (next token prediction)
+
+Linear probes let us **measure** this hierarchy scientifically!
+
+## 📚 Next Steps
+
+After completing both parts, you can:
+
+- Try other features: sentiment, tense, grammaticality
+- Explore attention patterns with TransformerLens visualization tools
+- Try activation patching to test **causal** importance
+- Read papers from Redwood Research, Anthropic, and EleutherAI on mech interp
+- Join the mech interp community and share your findings!
+
+## 🙏 Acknowledgments
+
+This workshop builds on techniques from:
+- The TransformerLens library by Neel Nanda
+- Probing work by Belinkov, Hewitt, and many others
+- The broader mechanistic interpretability research community
+
+
